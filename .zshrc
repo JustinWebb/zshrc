@@ -7,6 +7,12 @@ export EDITOR=$CODE
 # ------------------------------------------
 # NVM Setup
 # ------------------------------------------
+# Recommended installation instructions from SO article require additional
+# steps:
+#   # 4.25 - remove NPM_CONFIG_PREVIX variables
+#   # 4.75 - source /etc/profile.d/nvm.sh
+# http://stackoverflow.com/questions/11542846/nvm-node-js-recommended-install-for-all-users
+#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
