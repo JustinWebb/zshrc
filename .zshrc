@@ -26,8 +26,11 @@ source ~/dev/antigen/antigen.zsh
 # Load the oh-my-zsh's library.
 antigen use prezto
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
+# Bundles from the default repo.
+antigen bundle sorin-ionescu/prezto modules/helper  # required for Git module
+antigen bundle sorin-ionescu/prezto modules/editor
+antigen bundle sorin-ionescu/prezto modules/git
+antigen bundle sorin-ionescu/prezto modules/prompt
 antigen bundle command-not-found
 antigen bundle sudo
 antigen bundle ssh-agent
