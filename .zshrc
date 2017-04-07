@@ -57,6 +57,14 @@ alias ez="code ~/.zshrc"
 alias rz="source ~/.zshrc"
 alias uz="cp ~/dev/zshrc/.zshrc ~/.zshrc && source ~/.zshrc"
 
+## Navigation ##
+alias .="../"
+alias ..="../../"
+alias ...="../../../"
+alias ....="../../../../"
+alias dev="cd ~/dev"
+alias vm="cd ~/dev/valimail"
+
 ## Git ##
 alias gpom="git push origin master"
 alias gc="git commit"
@@ -104,17 +112,8 @@ function mkcd (){
     cd "$1"
 }
 
-# Open sublime project
-function sp (){
-  if [ -f ./*.sublime-project ]; then
-    subl ./*.sublime-project
-  else
-    echo No sublime-project file available
-  fi
-}
-
 # Output each path in $PATH to its own line
-function pathvar () {
+function path () {
     $SHELL -l -c 'echo $PATH | tr : "\n"'
 }
 
@@ -130,7 +129,7 @@ function filelike () {
 
 # kill stray LiveReload processes
 # http://danisadesigner.com/blog/killing-livereload-server/
-lrkill () {
+function lrkill () {
     LRPID=`lsof -n -i4TCP:35729 | grep LISTEN | awk '{print $2}'`
 
     if [ $LRPID ]
@@ -141,6 +140,16 @@ lrkill () {
 }
 
 # Recursively remove .DS_Store files from project
-killdsstore () {
+function killdsstore () {
     find . -name '*.DS_Store' -type f delete
 }
+
+# Open sublime project
+function sp (){
+  if [ -f ./*.sublime-project ]; then
+    subl ./*.sublime-project
+  else
+    echo No sublime-project file available
+  fi
+}
+
