@@ -10,7 +10,7 @@ export EDITOR=$CODE
 # ------------------------------------------
 # Recommended installation instructions from SO article require additional
 # steps:
-#   # 4.1 - remove NPM_CONFIG_PREVIX variable
+#  # 4.1 - remove NPM_CONFIG_PREVIX variable
 #   # 4.2 - source /etc/profile.d/nvm.sh
 # http://stackoverflow.com/questions/11542846/nvm-node-js-recommended-install-for-all-users
 #
@@ -27,7 +27,7 @@ source ~/dev/antigen/antigen.zsh
 antigen use prezto
 
 # Bundles from the default repo.
-antigen bundle sorin-ionescu/prezto modules/helper  # required for Git module
+antigen bundle sorin-ionescu/prezto modules/helper # required for Git module
 antigen bundle sorin-ionescu/prezto modules/editor
 antigen bundle sorin-ionescu/prezto modules/git
 antigen bundle sorin-ionescu/prezto modules/prompt
@@ -55,13 +55,13 @@ antigen apply
 alias code="nocorrect code"
 alias ez="code ~/.zshrc"
 alias rz="source ~/.zshrc"
-alias uz="cp ~/dev/zshrc/.zshrc ~/.zshrc && source ~/.zshrc"
+alias uz="cp ~/dev/zshrc/zshrc ~/.zshrc && source ~/.zshrc"
 
 ## Navigation ##
-alias .="cd ../"
-alias ..="cd ../../"
-alias ...="cd ../../../"
-alias ....="cd ../../../../"
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
 alias dev="cd ~/dev"
 alias vm="cd ~/dev/valimail"
 
@@ -107,14 +107,14 @@ alias gsa="git stash apply"
 # function name (){what do to; what else to do;}
 
 # Make directory and change to it in one command
-function mkcd (){
-    mkdir "$1"
-    cd "$1"
+function mkcd () {
+    mkdir "$1"
+    cd "$1"
 }
 
 # Output each path in $PATH to its own line
 function path () {
-    $SHELL -l -c 'echo $PATH | tr : "\n"'
+   $SHELL -l -c 'echo $PATH | tr : "\n"'
 }
 
 # Print number of one-lined git logs equal to (n)
