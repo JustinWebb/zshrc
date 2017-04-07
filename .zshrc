@@ -58,10 +58,10 @@ alias rz="source ~/.zshrc"
 alias uz="cp ~/dev/zshrc/.zshrc ~/.zshrc && source ~/.zshrc"
 
 ## Navigation ##
-alias .="../"
-alias ..="../../"
-alias ...="../../../"
-alias ....="../../../../"
+alias .="cd ../"
+alias ..="cd ../../"
+alias ...="cd ../../../"
+alias ....="cd ../../../../"
 alias dev="cd ~/dev"
 alias vm="cd ~/dev/valimail"
 
