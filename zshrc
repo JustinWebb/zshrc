@@ -1,7 +1,15 @@
 # ------------------------------------------
+# JWebb ZSH Setup
+# ------------------------------------------
+# 1) Be sure to use ZSH instead of Bash:
+#   `chsh -s $(which zsh)`
+# 2) Resolve unsafe ZSH directories:
+#   https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories
+#
+# ------------------------------------------
 # Environment Variables
 # ------------------------------------------
-export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
 export CODE=code
 export EDITOR=$CODE
 
@@ -10,42 +18,52 @@ export EDITOR=$CODE
 # ------------------------------------------
 # Recommended installation instructions from SO article require additional
 # steps:
-#  # 4.1 - remove NPM_CONFIG_PREVIX variable
-#   # 4.2 - source /etc/profile.d/nvm.sh
+#  # 4.1 - remove NPM_CONFIG_PREFIX variable (`unset NPM_CONFIG_PREFIX`)
+#  # 4.2 - source /etc/profile.d/nvm.sh
 # http://stackoverflow.com/questions/11542846/nvm-node-js-recommended-install-for-all-users
 #
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+unset NPM_CONFIG_PREFIX
+source /etc/profile.d/nvm.sh
 
 # ------------------------------------------
 # Antigen Config
 # ------------------------------------------
-source ~/dev/antigen/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
+# source $HOME/dev/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use prezto
 
 # Bundles from the default repo.
-antigen bundle sorin-ionescu/prezto modules/helper # required for Git module
-antigen bundle sorin-ionescu/prezto modules/editor
-antigen bundle sorin-ionescu/prezto modules/git
-antigen bundle sorin-ionescu/prezto modules/prompt
-antigen bundle command-not-found
-antigen bundle sudo
-antigen bundle ssh-agent
+antigen bundles <<EOBUNDLES
+    sorin-ionescu/prezto modules/helper # required for Git module
+    sorin-ionescu/prezto modules/editor
+    sorin-ionescu/prezto modules/git
+    sorin-ionescu/prezto modules/prompt
+    command-not-found
+    sudo
+    ssh-agent
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+    # Syntax highlighting bundle.
+    zsh-users/zsh-syntax-highlighting
 
-# Load the theme.
-# antigen theme [theme]
-## sindresorhus/pure ZSH theme as bundle ##
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+    # Load the theme.
+    # antigen theme [theme]
+    ## sindresorhus/pure ZSH theme as bundle ##
+    mafredri/zsh-async
+    sindresorhus/pure
+EOBUNDLES
 
 # Tell Antigen that you're done.
 antigen apply
+
+# Set Pure theme's ${PURE_PROMPT_SYMBOL:-❯}
+prompt pure
+PROMPT='%(?.%F{magenta}.%F{red}❯%F{magenta})❯%f '
 
 # ------------------------------------------
 # Custom Aliases
@@ -63,7 +81,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
 alias dev="cd ~/dev"
-alias vm="cd ~/dev/valimail"
+alias gojob="cd ~/dev/swirl"
 
 ## Git ##
 alias gpom="git push origin master"
@@ -112,12 +130,12 @@ function mkcd () {
     cd "$1"
 }
 
-# Output each path in $PATH to its own line
+# Output each path in $PATH to its own line
 function path () {
    $SHELL -l -c 'echo $PATH | tr : "\n"'
 }
 
-# Print number of one-lined git logs equal to (n)
+# Print number of one-lined git logs equal to (n)
 function gloc () {
     git log --oneline -"$1"
 }
@@ -128,7 +146,7 @@ function filelike () {
 }
 
 # kill stray LiveReload processes
-# http://danisadesigner.com/blog/killing-livereload-server/
+# http://danisadesigner.com/blog/killing-livereload-server/
 function lrkill () {
     LRPID=`lsof -n -i4TCP:35729 | grep LISTEN | awk '{print $2}'`
 
@@ -139,17 +157,17 @@ function lrkill () {
     fi
 }
 
-# Recursively remove .DS_Store files from project
+# Recursively remove .DS_Store files from project
 function killdsstore () {
     find . -name '*.DS_Store' -type f delete
 }
 
-# Open sublime project
-function sp (){
-  if [ -f ./*.sublime-project ]; then
-    subl ./*.sublime-project
-  else
-    echo No sublime-project file available
-  fi
+# Open sublime project
+function sp (){
+  if [ -f ./*.sublime-project ]; then
+    subl ./*.sublime-project
+  else
+    echo No sublime-project file available
+  fi
 }
 
