@@ -14,26 +14,38 @@ export CODE=code
 export EDITOR=$CODE
 
 # ------------------------------------------
-# NVM Setup
+# NVM Setup (Git Install)
 # ------------------------------------------
-# Recommended installation instructions from SO article require additional
-# steps:
-#  # 4.1 - remove NPM_CONFIG_PREFIX variable (`unset NPM_CONFIG_PREFIX`)
-#  # 4.2 - source /etc/profile.d/nvm.sh
-# http://stackoverflow.com/questions/11542846/nvm-node-js-recommended-install-for-all-users
-#
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-unset NPM_CONFIG_PREFIX
-source /etc/profile.d/nvm.sh
+# place this after nvm initialization for '.nvmrc'
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # ------------------------------------------
 # Antigen Config
 # ------------------------------------------
 source /usr/local/share/antigen/antigen.zsh
-# source $HOME/dev/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use prezto
@@ -80,8 +92,8 @@ alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
-alias dev="cd ~/dev"
-alias gojob="cd ~/dev/swirl"
+alias dev="cd ~/desktop/dev"
+alias gojob="cd ~/desktop/dev/swirl"
 
 ## Git ##
 alias gpom="git push origin master"
@@ -170,4 +182,3 @@ function sp (){
     echo No sublime-project file available
   fi
 }
-
