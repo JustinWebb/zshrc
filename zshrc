@@ -9,6 +9,7 @@
 # ------------------------------------------
 # Environment Variables
 # ------------------------------------------
+PATH="/usr/local/bin:$(getconf PATH)" # https://github.com/creationix/nvm/issues/1652
 export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
 export CODE=code
 export EDITOR=$CODE
