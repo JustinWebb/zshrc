@@ -66,7 +66,7 @@ antigen bundles <<EOBUNDLES
 
     # Load the theme.
     # antigen theme [theme]
-    ## sindresorhus/pure ZSH theme as bundle ##
+    ## sindresorhus/pure ZSH theme as bundle
     mafredri/zsh-async
     sindresorhus/pure
 EOBUNDLES
@@ -74,7 +74,7 @@ EOBUNDLES
 # Tell Antigen that you're done.
 antigen apply
 
-# Set Pure theme's ${PURE_PROMPT_SYMBOL:-❯}
+# Customize Pure theme's prompt ${PURE_PROMPT_SYMBOL:-❯}
 prompt pure
 PROMPT='%(?.%F{magenta}.%F{red}❯%F{magenta})❯%f '
 
@@ -115,6 +115,7 @@ alias gb="git branch"
 alias gt="git tag"
 alias gl="git log"
 alias glo="git log --oneline"
+alias glgp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias grs="git reset"
 alias grv="git revert"
 alias gm="git merge"
@@ -139,40 +140,50 @@ alias gsa="git stash apply"
 
 # Make directory and change to it in one command
 function mkcd () {
-    mkdir "$1"
-    cd "$1"
+  mkdir "$1"
+  cd "$1"
 }
 
 # Output each path in $PATH to its own line
 function path () {
-   $SHELL -l -c 'echo $PATH | tr : "\n"'
+  $SHELL -l -c 'echo $PATH | tr : "\n"'
 }
 
 # Print number of one-lined git logs equal to (n)
 function gloc () {
-    git log --oneline -"$1"
+  git log --oneline -"$1"
 }
 
 # search filenames for occurances
 function filelike () {
-    find . -iname "*$1" -print
+  find . -iname "*$1" -print
+}
+
+# Show all node processes
+function listnode () {
+  ps -ef | grep node
+}
+
+# Kill all node processes
+function killnode () {
+  pkill -f node
+}
+
+# Recursively remove .DS_Store files from project
+function killdsstore () {
+  find . -name '*.DS_Store' -type f delete
 }
 
 # kill stray LiveReload processes
 # http://danisadesigner.com/blog/killing-livereload-server/
 function lrkill () {
-    LRPID=`lsof -n -i4TCP:35729 | grep LISTEN | awk '{print $2}'`
+  LRPID=`lsof -n -i4TCP:35729 | grep LISTEN | awk '{print $2}'`
 
-    if [ $LRPID ]
-        then
-        echo 'Killing LiveReload server (PID: '$LRPID')'
-        kill $LRPID
-    fi
-}
-
-# Recursively remove .DS_Store files from project
-function killdsstore () {
-    find . -name '*.DS_Store' -type f delete
+  if [ $LRPID ]
+    then
+    echo 'Killing LiveReload server (PID: '$LRPID')'
+    kill $LRPID
+  fi
 }
 
 # Open sublime project
