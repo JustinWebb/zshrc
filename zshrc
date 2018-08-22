@@ -94,7 +94,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
 alias dev="cd ~/desktop/dev"
-alias gojob="cd ~/desktop/dev/swirl"
+alias gojob="cd ~/desktop/dev/zume"
 
 ## Git ##
 alias gpom="git push origin master"
