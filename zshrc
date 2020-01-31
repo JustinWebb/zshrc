@@ -82,20 +82,6 @@ PROMPT='%(?.%F{magenta}.%F{red}❯%F{magenta})❯%f '
 # Custom Aliases
 # ------------------------------------------
 
-## Terminal Edits ##
-alias code="nocorrect code"
-alias ez="code ~/.zshrc"
-alias rz="source ~/.zshrc"
-alias uz="cp ~/dev/zshrc/zshrc ~/.zshrc && source ~/.zshrc"
-
-## Navigation ##
-alias ..="cd ../"
-alias ...="cd ../../"
-alias ....="cd ../../../"
-alias .....="cd ../../../../"
-alias dev="cd ~/desktop/dev"
-alias gojob="cd ~/desktop/dev/zume"
-
 ## Git ##
 alias gpom="git push origin master"
 alias gc="git commit"
@@ -130,6 +116,24 @@ alias gf="git fetch"
 alias gr="git remote"
 alias gst="git stash"
 alias gsa="git stash apply"
+
+## Navigation ##
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
+alias dev="cd ~/desktop/dev"
+alias gojob="cd ~/desktop/dev/zume"
+
+## Terminal Edits ##
+alias code="nocorrect code"
+alias ez="code ~/.zshrc"
+alias rz="source ~/.zshrc"
+alias uz="dev && cp zshrc/zshrc ~/.zshrc && source ~/.zshrc"
+
+# Workstation-specific aliases
+# ------------------------------------------
+# [ENTER ALIASES HERE]
 
 # ------------------------------------------
 # Custom Functions
