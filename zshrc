@@ -68,7 +68,6 @@ antigen bundles <<EOBUNDLES
     # antigen theme [theme]
     ## sindresorhus/pure ZSH theme as bundle
     mafredri/zsh-async
-    sindresorhus/pure
 EOBUNDLES
 
 # Tell Antigen that you're done.
@@ -122,8 +121,8 @@ alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
-alias dev="cd ~/desktop/dev"
-alias gojob="cd ~/desktop/dev/zume"
+alias dev="cd ~/dev"
+alias gojob="cd ~/dev/NOTSET"
 
 ## Terminal Edits ##
 alias code="nocorrect code"
